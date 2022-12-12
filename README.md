@@ -29,7 +29,7 @@
 
 ## Demo 🏁
 
-
+https://instagram-clone-react-js.netlify.app/
 
 
 ## Run Locally 🖥
