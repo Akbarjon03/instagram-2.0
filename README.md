@@ -29,7 +29,7 @@
 
 ## Demo 🏁
 
-https://master.dx719ljz15xxd.amplifyapp.com/
+https://instagram-clone-react-js.netlify.app/
 
 
 ## Run Locally 🖥
