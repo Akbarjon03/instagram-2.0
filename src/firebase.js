@@ -4,13 +4,13 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA-hddie7J-3bSfZygFw3sP0PgXZWQOhNQ",
-  authDomain: "dropbox-ee88c.firebaseapp.com",
-  projectId: "dropbox-ee88c",
-  storageBucket: "dropbox-ee88c.appspot.com",
-  messagingSenderId: "602202076833",
-  appId: "1:602202076833:web:cd17540a05e2e9b5fce2e0",
-  measurementId: "G-3DFFGKD41R"
+  apiKey: "AIzaSyCs-MWC3eWkrZgX7Q2flo_8VSJ1sekFaEU",
+  authDomain: "instagram-react-6f590.firebaseapp.com",
+  projectId: "instagram-react-6f590",
+  storageBucket: "instagram-react-6f590.appspot.com",
+  messagingSenderId: "591820892681",
+  appId: "1:591820892681:web:351b5f5674c4de18b1a6d8",
+  measurementId: "G-EMBRCR665W"
 };
 
 const app = initializeApp(firebaseConfig);

@@ -24,8 +24,7 @@
 
 ## Demo 🏁
 
-https://instagram-clone-react-js.netlify.app/
-
+https://instagram-reactjs-qwasar.netlify.app/
 
 ## Run Locally 🖥
 
