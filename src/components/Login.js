@@ -16,7 +16,7 @@ function Login() {
         <p>Instagram</p>
         <button onClick={signIn}>
           <img src={Google} alt="" />
-          <span style={{ paddingRight: 20 }}>Sign in with Goggle</span>
+          <span style={{ paddingRight: 20 }}>Sign in with Google</span>
         </button>
       </ContentsWrapper>
     </LoginContainer>

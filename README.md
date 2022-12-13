@@ -9,11 +9,6 @@
 - Update Profile ⚙️
 - Log Out 📱
 
-
-
-
-
-
 ## Author 👨🏻‍💻
 
 - [@Akbarjon03](https://www.github.com/Akbarjon03)
@@ -29,7 +24,7 @@
 
 ## Demo 🏁
 
-
+https://instagram-clone-react-js.netlify.app/
 
 
 ## Run Locally 🖥
