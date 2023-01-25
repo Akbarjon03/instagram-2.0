@@ -24,7 +24,7 @@
 
 ## Demo 🏁
 
-https://instagram-reactjs-qwasar.netlify.app/
+https://instagram-qwasar.netlify.app/
 
 ## Run Locally 🖥
 
