@@ -3,14 +3,14 @@ import { DotsHorizontalIcon } from "@heroicons/react/solid";
 import { HeartIcon, PaperAirplaneIcon, ChatIcon, BookmarkIcon, TrashIcon, UserCircleIcon, XIcon } from "@heroicons/react/outline";
 import { HeartIcon as HeartIconFilled } from "@heroicons/react/solid";
 import { MdSentimentVerySatisfied } from "react-icons/md";
-import styled from "styled-components";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { addDoc, collection, deleteDoc, doc, onSnapshot, orderBy, query, serverTimestamp, setDoc } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../../firebase";
 import { useDispatch } from "react-redux";
-import { SetSelectedProfile } from "../Slice";
+import { SetSelectedProfile } from "../../Slice";
 import moment from "moment";
+import "../showPosts/ShowPosts.css"
 
 function Post({ post, user }) {
   const [comment, setComment] = useState("");
@@ -85,8 +85,8 @@ function Post({ post, user }) {
     deleteDoc(doc(db, "posts", post.id));
   };
   return (
-    <PostWrap>
-      <HeaderContainer>
+    <div className="PostWrap">
+      <div className="HeaderContainer">
         <img src={post.data().profileImg} alt="" onClick={visitProfile} />
         <p onClick={visitProfile}>{post.data().username}</p>
         {!isOpen ? (
@@ -102,7 +102,7 @@ function Post({ post, user }) {
         )}
 
         {isOpen && (
-          <DotsOptions>
+          <div className="DotsOptions">
             <li onClick={visitProfile}>
               <UserCircleIcon className="Icon" /> View profile
             </li>
@@ -111,13 +111,13 @@ function Post({ post, user }) {
                 <TrashIcon className="Icon" /> Delete
               </li>
             )}
-          </DotsOptions>
+          </div>
         )}
-      </HeaderContainer>
+      </div>
       {/* POST PHOTO */}
-      <PostCoverPhoto src={post.data().image} />
+      <div className="PostCoverPhoto" src={post.data().image} />
       {/* POST OPTIONS */}
-      <PostOptions>
+      <div className="PostOptions">
         <div style={{ display: "flex", gap: 15 }}>
           {hasLiked ? (
             <HeartIconFilled
@@ -136,7 +136,7 @@ function Post({ post, user }) {
           <PaperAirplaneIcon className="Nav__Icon" />
         </div>
         <BookmarkIcon className="Nav__Icon" />
-      </PostOptions>
+      </div>
       {/* LIKES */}
       <p style={{ paddingLeft: 10 }}>
         {likes.length > 0 && (
@@ -152,9 +152,9 @@ function Post({ post, user }) {
       </p>
       {/* COMMENTs */}
       {comments.length !== 0 && (
-        <CommentsContainer>
+        <div className="CommentsContainer">
           {comments?.map((comment) => (
-            <CommentWrapper key={comment.id}>
+            <div className="CommentWrapper" key={comment.id}>
               <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
                 <img src={comment.data().profileImg} alt="" />
                 <h5>
@@ -168,9 +168,9 @@ function Post({ post, user }) {
                   {moment(comment.data().timestamp?.toDate()).fromNow()}
                 </p>
               )}
-            </CommentWrapper>
+            </div>
           ))}
-        </CommentsContainer>
+        </div>
       )}
       {post && (
         <div style={{ padding: 10, color: "gray", fontSize: 12 }}>
@@ -178,7 +178,7 @@ function Post({ post, user }) {
         </div>
       )}
       {/* ADD COMMENT */}
-      <AddCommentContainer>
+      <div className="AddCommentContainer">
         <div>
           <MdSentimentVerySatisfied style={{ height: 30 }} />
           <form onSubmit={addComment}>
@@ -196,144 +196,9 @@ function Post({ post, user }) {
         <h4 style={{ cursor: "pointer" }} onClick={addComment}>
           Post
         </h4>
-      </AddCommentContainer>
-    </PostWrap>
+      </div>
+    </div>
   );
 }
 
 export default Post;
-const PostWrap = styled.div`
-  background-color: #fff;
-  margin-bottom: 30px;
-  border: 1px solid rgb(212 212 212);
-`;
-
-const HeaderContainer = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-  padding: 10px;
-  > img {
-    object-fit: contain;
-    height: 40px;
-    width: 40px;
-    border-radius: 9999px;
-    cursor: pointer;
-  }
-  > p {
-    flex: 1;
-    font-size: 15px;
-    cursor: pointer;
-    font-weight: 500;
-  }
-`;
-const DotsOptions = styled.ul`
-  position: absolute;
-  background-color: #fff;
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  padding: 10px;
-  right: 20px;
-  top: 40px;
-  > li {
-    display: flex;
-    align-items: center;
-    font-weight: 500;
-    gap: 10px;
-    padding: 10px;
-    cursor: pointer;
-  }
-`;
-
-const PostCoverPhoto = styled.img`
-  object-fit: contain;
-  width: 100%;
-`;
-const PostOptions = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: #000;
-  width: 100%;
-`;
-const CommentsContainer = styled.div`
-  max-height: 70px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 10px;
-  margin-left: 35px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin-right: 5px;
-
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #000;
-  }
-`;
-const CommentWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-  > div > img {
-    object-fit: contain;
-    height: 30px;
-    border-radius: 9999px;
-  }
-  > div > p {
-    color: #2d3748;
-    font-size: 15px;
-    height: 20px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    width: 150px;
-
-    @media (min-width: 750px) {
-      width: 250px;
-    }
-  }
-  > p {
-    min-width: 50px;
-    height: 18px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    @media (min-width: 750px) {
-      width: auto;
-    }
-  }
-`;
-const AddCommentContainer = styled.div`
-  border-top: 1px solid #e2e8f0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px;
-  color: gray;
-  > div {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-  }
-  > div > form > input {
-    border: 0px;
-    font-size: 15px;
-    flex: 1;
-    :focus {
-      outline: none;
-    }
-  }
-  > div > form > button {
-    display: none;
-    cursor: pointer;
-  }
-`;

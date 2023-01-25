@@ -1,4 +1,4 @@
-import Header from "./components/Header";
+import Header from "../src/components/header/Header";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -8,10 +8,10 @@ import { selectAddPostIsOpen, SetScreen, SetPosts } from "./Slice";
 import { useTransition, animated } from "react-spring";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { Routes, Route } from "react-router-dom";
-import Profile from "./components/UsersMainFile";
-import Feed from "./components/Feed";
-import Login from "./components/Login";
-import AddPost from "./components/Posts";
+import Profile from "../src/components/userMainFile/UsersMainFile";
+import Feed from "../src/components/feed/Feed";
+import Login from "../src/components/login/Login";
+import AddPost from "../src/components/post/Posts";
 
 function App() {
   const dispatch = useDispatch();

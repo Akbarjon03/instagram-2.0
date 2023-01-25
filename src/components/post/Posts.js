@@ -1,13 +1,13 @@
 import React, { useRef, useState, useEffect } from "react";
-import styled from "styled-components";
 import { CameraIcon } from "@heroicons/react/outline";
 import { addDoc, doc, updateDoc, collection, serverTimestamp } from "firebase/firestore";
-import { db, auth, storage } from "../firebase";
+import { db, auth, storage } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { ref, getDownloadURL, uploadString } from "firebase/storage";
 import { useDispatch } from "react-redux";
-import { setAddPostModal } from "../Slice";
+import { setAddPostModal } from "../../Slice";
 import Spinner from "react-spinkit";
+import "../post/Posts.css"
 
 function AddPost() {
   const [user] = useAuthState(auth);
@@ -74,9 +74,9 @@ function AddPost() {
   };
 
   return (
-    <AddPostWrapper>
-      <ModalContentWrapper ref={modalContentRef}>
-        <ContentContainer>
+    <div className="AddPostWrapper">
+      <div className="ModalContentWrapper" ref={modalContentRef}>
+        <div className="ContentContainer">
           {selectedFile ? (
             <img
               src={selectedFile}
@@ -154,46 +154,10 @@ function AddPost() {
               POST
             </button>
           )}
-        </ContentContainer>
-      </ModalContentWrapper>
-    </AddPostWrapper>
+        </div>
+      </div>
+    </div>
   );
 }
 
 export default AddPost;
-
-const AddPostWrapper = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  z-index: 12;
-`;
-const ModalContentWrapper = styled.div`
-  display: flex;
-  margin: auto;
-  background-color: #fff;
-  width: 30%;
-  height: 50vh;
-  min-width: 300px;
-  border-radius: 10px;
-`;
-const ContentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: auto;
-  > button {
-    font-weight: 600;
-    width: 60%;
-    padding: 10px;
-    cursor: pointer;
-    margin-top: 5px;
-    border: none;
-    border-radius: 5px;
-  }
-`;
